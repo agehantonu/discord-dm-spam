@@ -16,7 +16,6 @@ import (
 	"time"
 )
 
-// discordgoの型の代わりに使用する構造体
 type channel struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
@@ -61,7 +60,7 @@ func getIcon(url string) string {
 	return fmt.Sprintf("data:%s;base64,%s", http.DetectContentType(b), base64.StdEncoding.EncodeToString(b))
 }
 
-// 直接リクエストを送るためのヘルパー
+
 func request(method, url, tk string, body interface{}) (*http.Response, []byte) {
 	var b io.Reader
 	if body != nil {
@@ -101,13 +100,13 @@ func main() {
 		fmt.Print("ID(カンマ区切り): ")
 		uInput, _ := rd.ReadString('\n')
 		uIDs := strings.Split(strings.TrimSpace(uInput), ",")
-		fmt.Print("名: ")
+		fmt.Print("作成するグループ名: ")
 		name, _ := rd.ReadString('\n')
-		fmt.Print("URL: ")
+		fmt.Print("画像URL: ")
 		url, _ := rd.ReadString('\n')
-		fmt.Print("文: ")
+		fmt.Print("送信する文: ")
 		msg, _ := rd.ReadString('\n')
-		fmt.Print("数: ")
+		fmt.Print("作成数: ")
 		var count int
 		fmt.Scanln(&count)
 
@@ -122,11 +121,11 @@ func main() {
 		}
 		wg.Wait()
 	} else {
-		fmt.Print("検索名: ")
+		fmt.Print("抜けるグループ名: ")
 		target, _ := rd.ReadString('\n')
-		fmt.Print("新名: ")
+		fmt.Print("変える名前: ")
 		newName, _ := rd.ReadString('\n')
-		fmt.Print("URL: ")
+		fmt.Print("画像URL: ")
 		url, _ := rd.ReadString('\n')
 
 		icon := getIcon(strings.TrimSpace(url))
@@ -190,7 +189,7 @@ func runExit(tk, target, newName, icon string) {
 	json.Unmarshal(data, &chs)
 
 	for _, ch := range chs {
-		if ch.Type == 3 && strings.Contains(ch.Name, target) { // Type 3 = Group DM
+		if ch.Type == 3 && strings.Contains(ch.Name, target) { 
 			res := []string{"<" + ch.ID + ">"}
 			if r, _ := request("PATCH", "/channels/"+ch.ID, tk, map[string]interface{}{"name": newName}); r != nil && r.StatusCode == 200 {
 				res = append(res, "名前変更成功")
