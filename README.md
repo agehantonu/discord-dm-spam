@@ -1,6 +1,9 @@
 # discord-dm-spam
 dm spamer
-<img width="750" height="608" alt="image" src="https://github.com/user-attachments/assets/375044b8-0d52-4fd6-8568-18a58dbc70e6" />
 
+
+<img width="844" height="268" alt="image" src="https://github.com/user-attachments/assets/53a5fa82-598d-47ad-baa1-ff2ef34f425f" />
+
+Support　by disocrd - ag3q
 
 [discord server join now](https://discord.gg/KZTRNxYrRx)
